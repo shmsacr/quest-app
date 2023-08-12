@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from "react";
 import Post from "../Post/Post";
+import PostForm from "../Post/PostForm";
 
 function Home(){
     const [error,setError] = useState(null);
     const [isLoaded,setIsloaded] = useState(false);
     const [postList,setPostList] = useState([]);
 
-    useEffect(()=>{
+    const refresPosts =() => {
         fetch("/posts")
             .then(res =>res.json())
             .then((result) => {
@@ -17,16 +18,19 @@ function Home(){
                     setIsloaded(true);
                     setError(error);
                 })
-    },)
+    }
+    useEffect(()=>{
+    refresPosts();
+    },[postList])
     if(error){
         return <div> ERROR!!</div>;
     }else if(!isLoaded){
         return <div> Loading...</div>;
     }else{
         return (
-            <div className="container">
-                Home!!!
-                {postList.map(post=> (<Post title = {post.title} text ={post.text}></Post>))}
+            <div style ={{backgroundColor:"#f0f5ff",height:"100vH",justifyContent: "center", flexDirection: "column",alignItems: "center" }}>
+                <PostForm userId = {1} userName = {"post.userName"}  refresPosts = {refresPosts}/>
+                {postList.map(post=> (<Post userId = {post.userId} userName = {post.userName} title = {post.title} text ={post.text} ></Post>))}
             </div>
 
         );
