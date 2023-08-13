@@ -29,8 +29,8 @@ function Home(){
     }else{
         return (
             <div style ={{backgroundColor:"#f0f5ff",height:"100vH",justifyContent: "center", flexDirection: "column",alignItems: "center" }}>
-                <PostForm userId = {1} userName = {"post.userName"}  refresPosts = {refresPosts}/>
-                {postList.map(post=> (<Post userId = {post.userId} userName = {post.userName} title = {post.title} text ={post.text} ></Post>))}
+                <PostForm userId = {4} userName = {"post.userName"}  refresPosts = {refresPosts}/>
+                {postList.map(post=> (<Post userId = {post.userId} userName = {post.userName} title = {post.title} text ={post.text} postId = {post.id}></Post>))}
             </div>
 
         );
